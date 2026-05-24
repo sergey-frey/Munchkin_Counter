@@ -6,24 +6,24 @@ import { useCountersStore } from "@/store/counters-store";
 import { InfoMenu } from "./info-menu";
 
 export const Race = () => {
-	const id = useCounterId();
-	const { race } = useCounter();
-	const setRace = useCountersStore((state) => state.setRace);
+  const id = useCounterId();
+  const { race } = useCounter();
+  const setRace = useCountersStore((state) => state.setRace);
 
-	const handleChange = (value: RaceType, isChecked: boolean) => {
-		let newRace: RaceType[] = [];
-		if (isChecked) {
-			newRace = [...race, value];
-		} else {
-			newRace = race.filter((r) => r !== value);
-		}
+  const handleChange = (value: RaceType, isChecked: boolean) => {
+    let newRace: RaceType[] = [];
+    if (isChecked) {
+      newRace = [...race, value];
+    } else {
+      newRace = race.filter((r) => r !== value);
+    }
 
-		if (newRace.length === 0) {
-			newRace = ["Человек"];
-		}
+    if (newRace.length === 0) {
+      newRace = ["Человек"];
+    }
 
-		setRace(id, newRace);
-	};
+    setRace(id, newRace);
+  };
 
-	return <InfoMenu items={RACE_LIST} value={race} onChange={handleChange} />;
+  return <InfoMenu items={RACE_LIST} value={race} onChange={handleChange} />;
 };

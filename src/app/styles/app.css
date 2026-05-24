@@ -1,5 +1,6 @@
 @import "./vars.css";
 @import "./main.css";
+@import "./themes.css";
 @import "./header.css";
 @import "./counter.css";
 @import "./total.css";
@@ -8,6 +9,16 @@
 @import "./sideCount.css";
 @import "./birthday.css";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-neutral-900: #131325;
+  --color-primary-500: #f5deb3;
+  --color-danger-500: #e11d48;
+}
+
+/* Race fonts apply to content text but not to interactive controls */
+button, input, select {
+  font-family: monospace;
+  font-size: 0.85rem;
+}

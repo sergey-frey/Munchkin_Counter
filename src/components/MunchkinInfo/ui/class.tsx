@@ -6,25 +6,25 @@ import { useCountersStore } from "@/store/counters-store";
 import { InfoMenu } from "./info-menu";
 
 export const Class = () => {
-	const id = useCounterId();
-	const { classes } = useCounter();
-	const setClass = useCountersStore((state) => state.setClass);
+  const id = useCounterId();
+  const { classes } = useCounter();
+  const setClass = useCountersStore((state) => state.setClass);
 
-	const classesValue = classes.length === 0 ? ["(нет класса)"] : classes;
+  const classesValue = classes.length === 0 ? ["(нет класса)"] : classes;
 
-	const handleChange = (value: ClassType, isChecked: boolean) => {
-		let newRace: ClassType[] = [];
+  const handleChange = (value: ClassType, isChecked: boolean) => {
+    let newRace: ClassType[] = [];
 
-		if (isChecked) {
-			newRace = [...classes, value];
-		} else {
-			newRace = classes.filter((r) => r !== value);
-		}
+    if (isChecked) {
+      newRace = [...classes, value];
+    } else {
+      newRace = classes.filter((r) => r !== value);
+    }
 
-		setClass(id, newRace);
-	};
+    setClass(id, newRace);
+  };
 
-	return (
-		<InfoMenu items={CLASS_LIST} value={classesValue} onChange={handleChange} />
-	);
+  return (
+    <InfoMenu items={CLASS_LIST} value={classesValue} onChange={handleChange} />
+  );
 };

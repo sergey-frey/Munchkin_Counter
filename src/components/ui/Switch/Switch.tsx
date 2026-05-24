@@ -21,8 +21,8 @@ export const MCSwitch = ({
 			checked={checked}
 			onChange={onChangeToggle}
 			className={twJoin(
-				"rounded-full bg-neutral-900 border-[1px] border-primary-500 outline-none transition-colors",
-				"w-11 h-[22px] relative",
+				"rounded-full bg-neutral-900 border border-primary-500 outline-none transition-colors",
+				"w-11 h-5.5 relative",
 				checked && "bg-primary-500",
 				className,
 			)}
@@ -32,7 +32,7 @@ export const MCSwitch = ({
 				className={twJoin(
 					"absolute left-1 top-1",
 					"inline-block h-3 w-3 transform rounded-full bg-primary-500 transition-all",
-					checked && "!left-[24px] !bg-neutral-900",
+					checked && "left-6! bg-neutral-900!",
 				)}
 			/>
 		</Switch>

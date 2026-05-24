@@ -1,18 +1,19 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
 import { resolve } from "node:path";
+import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 
 export default defineConfig(() => {
-	return {
-		base: "/Munchkin_Counter/",
-		build: {
-			outDir: "build",
-		},
-		resolve: {
-			alias: {
-				"@": resolve(__dirname, "src"),
-			},
-		},
-		plugins: [react()],
-	};
+  return {
+    base: "/Munchkin_Counter/",
+    build: {
+      outDir: "build",
+    },
+    resolve: {
+      alias: {
+        "@": resolve(__dirname, "src"),
+      },
+    },
+    plugins: [react(), tailwindcss()],
+  };
 });
