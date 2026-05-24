@@ -28,11 +28,11 @@ export const Drawer = () => {
         className={twJoin(
           isOpen && "translate-x-full",
           "fixed right-0 translate-x-0 top-1/4 transition-transform",
-          "bg-primary-500 text-neutral-900 text-3xl",
+          "bg-primary-500 text-neutral-900",
           "pt-6 pb-5 px-0 z-5",
         )}
       >
-        <i className="bx bx-chevron-left" />
+        <i className="bx bx-chevron-left text-2xl" />
       </button>
       <Transition as={Fragment} show={isOpen}>
         <Dialog onClose={() => setIsOpen(false)}>
