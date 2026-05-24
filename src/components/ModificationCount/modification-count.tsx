@@ -47,11 +47,13 @@ export const ModificationCount = () => {
     handleCloseModal();
   };
 
+  const btnBase = "bg-transparent text-text cursor-pointer border border-primary-500";
+
   return (
-    <section className="side-count__wrapper">
+    <section>
       <button
         type="button"
-        className="side-count__btn btn"
+        className={`${btnBase} p-[8px_10px] tracking-[1px]`}
         onClick={handleClickSideCountBtn}
       >
         Модификаторы
@@ -62,28 +64,28 @@ export const ModificationCount = () => {
         onOverlayClick={handleCloseModal}
       >
         <Modal.Header>Модификаторы</Modal.Header>
-        <Modal.Body className="side-count__modal__body">
+        <Modal.Body className="pb-[15px]">
           <Input
             placeholder={String(modification)}
             inputMode="numeric"
-            className="side-count__modal__input"
+            className="w-full text-[1.1rem]"
             value={inputValue}
             onChange={handleChangeInput}
             ref={inputRef}
           />
         </Modal.Body>
         <Modal.Footer>
-          <div className="side-count__modal__actions">
+          <div className="flex gap-[7px] justify-end">
             <button
               type="button"
-              className="btn"
+              className={`${btnBase} p-[6px_8px] text-[0.9rem]`}
               onClick={handleClickResetCount}
             >
               Сбросить
             </button>
             <button
               type="button"
-              className="btn"
+              className={`${btnBase} p-[6px_8px] text-[0.9rem]`}
               onClick={handleClickSaveCount}
             >
               Сохранить

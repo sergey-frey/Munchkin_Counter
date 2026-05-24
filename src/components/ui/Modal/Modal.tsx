@@ -35,23 +35,35 @@ export const Modal = ({
     onOverlayClick();
   };
 
+  const transitionStyles: Record<string, string> = {
+    entering: "opacity-0 translate-y-[-10px] pointer-events-none",
+    entered: "opacity-100 translate-y-0 transition-all duration-150 ease-in pointer-events-auto",
+    exiting: "opacity-100 translate-y-0 pointer-events-auto",
+    exited: "opacity-0 translate-y-[-10px] transition-all duration-150 ease-out pointer-events-none",
+  };
+
   return (
-    <Transition
-      in={isOpen}
-      timeout={150}
-      classNames={"modal"}
-      nodeRef={modalRef}
-    >
+    <Transition in={isOpen} timeout={150} nodeRef={modalRef}>
       {(state) => (
         <section
-          className={clsx("modal__overlay", `modal-${state}`)}
+          className={clsx(
+            "fixed inset-0 z-[100] w-[100dvw] h-[100dvh] bg-black/20 p-[25px] backdrop-blur-[8px]",
+            transitionStyles[state],
+          )}
           onClick={handleOverlayClick}
           ref={modalRef}
         >
-          <button type="button" className="modal__close btn" onClick={onClose}>
+          <button
+            type="button"
+            className="fixed top-[20px] right-[20px] w-[28px] h-[28px] grid place-items-center text-[23px] bg-transparent text-text cursor-pointer border border-primary-500"
+            onClick={onClose}
+          >
             <i className="bx bx-x" />
           </button>
-          <section className="modal__window" data-id={"modal-window"}>
+          <section
+            className="w-full max-w-[600px] mx-auto mt-[120px] bg-bg border border-primary-500 p-[20px_25px] text-[1rem] flex flex-col"
+            data-id={"modal-window"}
+          >
             {children}
           </section>
         </section>
@@ -62,7 +74,10 @@ export const Modal = ({
 
 Modal.Header = ({ children, className, ...props }: ModelSectionProps) => {
   return (
-    <header {...props} className={clsx("modal__header", className)}>
+    <header
+      {...props}
+      className={clsx("text-[1.3rem] pb-[15px]", className)}
+    >
       {children}
     </header>
   );
@@ -70,7 +85,7 @@ Modal.Header = ({ children, className, ...props }: ModelSectionProps) => {
 
 Modal.Body = ({ children, className, ...props }: ModelSectionProps) => {
   return (
-    <section {...props} className={clsx("modal__body", className)}>
+    <section {...props} className={clsx(className)}>
       {children}
     </section>
   );
@@ -78,7 +93,7 @@ Modal.Body = ({ children, className, ...props }: ModelSectionProps) => {
 
 Modal.Footer = ({ children, className, ...props }: ModelSectionProps) => {
   return (
-    <footer {...props} className={clsx("modal__footer", className)}>
+    <footer {...props} className={clsx("mt-auto", className)}>
       {children}
     </footer>
   );

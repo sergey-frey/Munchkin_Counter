@@ -16,5 +16,10 @@ export const ProgressBar = ({ duration, onFinish }: ProgressBarProps) => {
     }
   }, [onFinish, progress]);
 
-  return <div className="progress" style={{ width: widthPercentage }} />;
+  return (
+    <div
+      className="absolute bottom-[-8px] h-[4px] bg-primary-500 rounded-[5px]"
+      style={{ width: widthPercentage }}
+    />
+  );
 };

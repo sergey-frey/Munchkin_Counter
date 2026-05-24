@@ -22,13 +22,17 @@ export const Random = () => {
   };
 
   return (
-    <section className="randomWrapper">
-      <button type="button" className="randomBtn" onClick={getRandomValue}>
+    <section className="flex items-center overflow-hidden">
+      <button
+        type="button"
+        className="pt-[4px] border-none bg-transparent text-text text-[30px] cursor-pointer"
+        onClick={getRandomValue}
+      >
         <i className="bx bxs-dice-5" />
       </button>
       {randomValue.value && (
-        <div className="value">
-          <div className="wrapper">
+        <div className="fixed top-[50px] left-1/2 translate-x-[-50%] w-[80px] h-[80px] border border-primary-500 text-[40px] bg-bg grid place-items-center">
+          <div className="grid place-items-center w-full h-full relative">
             {randomValue.value}
             <ProgressBar
               key={Date.now()}

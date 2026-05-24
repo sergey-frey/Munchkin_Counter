@@ -18,7 +18,7 @@ export const Controls = () => {
 	const { level, items } = useCounter();
 
 	return (
-		<div className="counters">
+		<div className="flex flex-wrap gap-0 justify-around">
 			<Counter
 				title={"Уровень"}
 				value={level}

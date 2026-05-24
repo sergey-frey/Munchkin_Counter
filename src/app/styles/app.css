@@ -1,24 +1,48 @@
-@import "./vars.css";
-@import "./main.css";
-@import "./themes.css";
-@import "./header.css";
-@import "./counter.css";
-@import "./total.css";
-@import "./random.css";
-@import "./modal.css";
-@import "./sideCount.css";
-@import "./birthday.css";
-
+/*@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Rye&family=Nunito:wght@400;700&family=VT323&family=Oswald:wght@700&display=swap');*/
 @import "tailwindcss";
+@import "./themes.css";
 
 @theme {
   --color-neutral-900: #131325;
   --color-primary-500: #f5deb3;
   --color-danger-500: #e11d48;
+
+  --color-bg: #131325;
+  --color-text: #e8e8e8;
 }
 
-/* Race fonts apply to content text but not to interactive controls */
-button, input, select {
-  font-family: monospace;
-  font-size: 0.85rem;
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+
+  html,
+  body {
+    width: 100%;
+    min-height: 100dvh;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: monospace;
+  }
+
+  #root {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+
+  /* Race fonts apply to content text but not to interactive controls */
+  button,
+  input,
+  select {
+    font-family: monospace;
+    font-size: 0.85rem;
+  }
 }

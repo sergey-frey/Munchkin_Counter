@@ -10,7 +10,7 @@ export const GenderButton = () => {
   return (
     <button
       type="button"
-      className={`${isMale ? "male " : "female "}btn`}
+      className="grid items-center justify-center w-13.75 h-13.75 p-[8px_9px_6px_9px] bg-transparent text-text cursor-pointer border border-primary-500 text-[30px]"
       onClick={() => toggleGender(id)}
     >
       <i className={isMale ? icons.male : icons.female} />

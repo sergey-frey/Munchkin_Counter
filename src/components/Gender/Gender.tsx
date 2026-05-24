@@ -3,7 +3,7 @@ import { IconsToggle } from "@/components/IconsToggle";
 
 export const Gender = () => {
   return (
-    <ul className="options">
+    <ul className="flex flex-col items-center justify-center gap-6.25 list-none">
       <li>
         <GenderButton />
       </li>

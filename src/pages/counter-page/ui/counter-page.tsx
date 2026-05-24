@@ -10,25 +10,25 @@ import { Random } from "@/components/Random";
 import { Total } from "@/components/Total";
 import { useCounter } from "@/shared/hooks/use-counter";
 
-const RACE_FONTS: Record<string, string> = {
-  Эльф: "'Cinzel'",
-  Дварф: "'Rye'",
-  Хафлинг: "'Nunito'",
-  Гном: "'VT323'",
-  Орк: "'Oswald'",
+const hexToRgb = (hex: string): [number, number, number] => {
+  const n = parseInt(hex.slice(1), 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+};
+
+const mixColors = (colors: string[]): string => {
+  const [r, g, b] = colors
+    .map(hexToRgb)
+    .reduce(([ar, ag, ab], [r, g, b]) => [ar + r, ag + g, ab + b], [0, 0, 0])
+    .map((c) => Math.round(c / colors.length));
+  return `rgb(${r},${g},${b})`;
 };
 
 const RACE_COLORS: Record<string, string> = {
-  Эльф: "#86efac",
-  Дварф: "#fbbf24",
-  Хафлинг: "#d97706",
-  Гном: "#22d3ee",
-  Орк: "#a3e635",
-};
-
-const RACE_EXTRAS: Record<string, { letterSpacing?: string; fontWeight?: string }> = {
-  Гном: { letterSpacing: "0.06em" },
-  Орк: { letterSpacing: "0.1em", fontWeight: "700" },
+  Эльф: "#6aab87",
+  Дварф: "#b8965a",
+  Хафлинг: "#c47060",
+  Гном: "#4fa8b8",
+  Орк: "#7aa040",
 };
 
 const CLASS_PATTERNS: Record<string, string> = {
@@ -48,27 +48,16 @@ export const CounterPage = () => {
   useEffect(() => {
     const races = raceKey ? raceKey.split(",") : [];
 
-    // Combine all active race fonts into a single stack
-    const fonts = races.map((r) => RACE_FONTS[r]).filter(Boolean);
-    document.body.style.fontFamily =
-      fonts.length > 0 ? `${fonts.join(", ")}, monospace` : "";
-
-    // Primary race (first) determines the text color
-    const color = races.map((r) => RACE_COLORS[r]).find(Boolean) ?? "";
-    if (color) {
-      document.body.style.setProperty("--textColor", color);
+    const activeColors = races.map((r) => RACE_COLORS[r]).filter(Boolean);
+    if (activeColors.length > 0) {
+      document.body.style.setProperty("--color-text", mixColors(activeColors));
     } else {
-      document.body.style.removeProperty("--textColor");
+      document.body.style.removeProperty("--color-text");
     }
-
-    // Extra styles (letter-spacing, font-weight) from first matching race
-    const extras = races.map((r) => RACE_EXTRAS[r]).find(Boolean) ?? {};
-    document.body.style.letterSpacing = extras.letterSpacing ?? "";
-    document.body.style.fontWeight = extras.fontWeight ?? "";
 
     return () => {
       document.body.style.fontFamily = "";
-      document.body.style.removeProperty("--textColor");
+      document.body.style.removeProperty("--color-text");
       document.body.style.letterSpacing = "";
       document.body.style.fontWeight = "";
     };
@@ -76,11 +65,14 @@ export const CounterPage = () => {
 
   // Each active class gets its own overlay div (portaled into body, below #root)
   const patternOverlays = classKey
-    ? classKey.split(",").map((c) => CLASS_PATTERNS[c]).filter(Boolean)
+    ? classKey
+        .split(",")
+        .map((c) => CLASS_PATTERNS[c])
+        .filter(Boolean)
     : [];
 
   return (
-    <div className="App">
+    <div className="flex flex-col gap-0 justify-around h-150 w-full max-w-175">
       {patternOverlays.map((cls) =>
         createPortal(
           <div className={`pattern-overlay ${cls}`} aria-hidden="true" />,
